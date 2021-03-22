@@ -40,6 +40,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -51,18 +52,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Finds\FindsQuickViewModel.cs" />
+    <Compile Include="Application\Finds\PagingResult.cs" />
     <Compile Include="Database\AppDbContext.cs" />
     <Compile Include="Database\ContextInitializer.cs" />
-    <Compile Include="Database\Find.cs" />
-    <Compile Include="Database\Material.cs" />
-    <Compile Include="Database\Period.cs" />
-    <Compile Include="Database\User.cs" />
+    <Compile Include="Database\Models\Find.cs" />
+    <Compile Include="Database\Models\Image.cs" />
+    <Compile Include="Database\Models\Material.cs" />
+    <Compile Include="Database\Models\Period.cs" />
+    <Compile Include="Database\Models\User.cs" />
+    <Compile Include="Database\Services\FindService.cs" />
+    <Compile Include="Database\Services\IFindService.cs" />
+    <Compile Include="Database\Services\IUserService.cs" />
+    <Compile Include="Database\Services\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

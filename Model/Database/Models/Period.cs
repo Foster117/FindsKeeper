@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model.Database
+namespace Model.Database.Models
 {
-    public class User
+    public class Period
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Password { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Database.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Text;
@@ -9,33 +10,72 @@ namespace Model.Database
     {
         protected override void Seed(AppDbContext db)
         {
-            db.Materials.Add(new Material { MaterialName = "Медь" });
-            db.Materials.Add(new Material { MaterialName = "Серебро" });
-            db.Materials.Add(new Material { MaterialName = "Бронза" });
-            db.Materials.Add(new Material { MaterialName = "Олово" });
-            db.Materials.Add(new Material { MaterialName = "Железо" });
-            db.Materials.Add(new Material { MaterialName = "Золото" });
-            db.Materials.Add(new Material { MaterialName = "Медно-никелевый сплав" });
-            db.Materials.Add(new Material { MaterialName = "Медно-цинковый сплав" });
-            db.Materials.Add(new Material { MaterialName = "Другой" });
+            db.Materials.Add(new Material { Name = "Медь" });
+            db.Materials.Add(new Material { Name = "Серебро" });
+            db.Materials.Add(new Material { Name = "Бронза" });
+            db.Materials.Add(new Material { Name = "Олово" });
+            db.Materials.Add(new Material { Name = "Железо" });
+            db.Materials.Add(new Material { Name = "Золото" });
+            db.Materials.Add(new Material { Name = "Медно-никелевый сплав" });
+            db.Materials.Add(new Material { Name = "Медно-цинковый сплав" });
+            db.Materials.Add(new Material { Name = "Другой" });
 
-            db.Periods.Add(new Period { PeriodName = "Российская Империя" });
-            db.Periods.Add(new Period { PeriodName = "СССР" });
-            db.Periods.Add(new Period { PeriodName = "Польское Королевство" });
-            db.Periods.Add(new Period { PeriodName = "Киевская Русь" });
-            db.Periods.Add(new Period { PeriodName = "Черняховская Культура" });
-            db.Periods.Add(new Period { PeriodName = "Ранний Железный Век" });
-            db.Periods.Add(new Period { PeriodName = "Римская Империя" });
-            db.Periods.Add(new Period { PeriodName = "Скифы" });
-            db.Periods.Add(new Period { PeriodName = "Другой" });
+            db.Periods.Add(new Period { Name = "Российская Империя" });
+            db.Periods.Add(new Period { Name = "СССР" });
+            db.Periods.Add(new Period { Name = "Польское Королевство" });
+            db.Periods.Add(new Period { Name = "Киевская Русь" });
+            db.Periods.Add(new Period { Name = "Черняховская Культура" });
+            db.Periods.Add(new Period { Name = "Ранний Железный Век" });
+            db.Periods.Add(new Period { Name = "Римская Империя" });
+            db.Periods.Add(new Period { Name = "Скифы" });
+            db.Periods.Add(new Period { Name = "Другой" });
 
             db.Users.Add(new User() { Name = "Foster117", Password = "qwerty" });
 
             db.SaveChanges();
 
-            db.Finds.Add(new Find { Name = "5 рублей 1898", MaterialId = 6, PeriodId = 1, OwnerId = 1, UploadDate = DateTime.Now, Description = "5 рублей, Николай II" }); ;
-            db.Finds.Add(new Find { Name = "Крестик", MaterialId = 3, PeriodId = 4, OwnerId = 1, UploadDate = DateTime.Now, Description = "Место находки: Киевская обл." });
-            db.Finds.Add(new Find { Name = "Наконечник", MaterialId = 1, PeriodId = 2, OwnerId = 1, UploadDate = DateTime.Now, Description = "Наконечник типа 'Семечка'" });
+            db.Finds.Add(new Find { Name = "5 рублей 1898", MaterialId = 6, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "5 рублей, Николай II" }); ;
+            db.Finds.Add(new Find { Name = "Крестик", MaterialId = 3, PeriodId = 4, UserId = 1, UploadDate = DateTime.Now, Description = "Место находки: Киевская обл." });
+            db.Finds.Add(new Find { Name = "Наконечник", MaterialId = 3, PeriodId = 8, UserId = 1, UploadDate = DateTime.Now, Description = "Наконечник типа 'Семечка'" });
+            db.Finds.Add(new Find { Name = "Шумящая привеска", MaterialId = 3, PeriodId = 4, UserId = 1, UploadDate = DateTime.Now, Description = "Возраст около 1000 лет" }); ;
+            db.Finds.Add(new Find { Name = "Фибула", MaterialId = 3, PeriodId = 5, UserId = 1, UploadDate = DateTime.Now, Description = "Место находки: Черниговская обл." });
+            db.Finds.Add(new Find { Name = "5 коп 1935", MaterialId = 7, PeriodId = 2, UserId = 1, UploadDate = DateTime.Now, Description = "Редкая разновидность" });
+            db.Finds.Add(new Find { Name = "Пол копейки", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Николай II" }); ;
+            db.Finds.Add(new Find { Name = "1 копейка", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Павловская копейка. Место находки: Киев" });
+            db.Finds.Add(new Find { Name = "Солид", MaterialId = 2, PeriodId = 3, UserId = 1, UploadDate = DateTime.Now, Description = "Солид Сегезмунда III, 1630-е года" });
+            db.Finds.Add(new Find { Name = "Полторак", MaterialId = 2, PeriodId = 3, UserId = 1, UploadDate = DateTime.Now, Description = "Место находки: Киевская обл." }); ;
+            db.Finds.Add(new Find { Name = "Денарий", MaterialId = 2, PeriodId = 7, UserId = 1, UploadDate = DateTime.Now, Description = "Динарий Антонин Пий 520-535г" });
+            db.Finds.Add(new Find { Name = "Вислая печать", MaterialId = 4, PeriodId = 4, UserId = 1, UploadDate = DateTime.Now, Description = "Целая вислая печать. Место находки: Житомирская обл." });
+            db.Finds.Add(new Find { Name = "Лезвие Ножа", MaterialId = 5, PeriodId = 6, UserId = 1, UploadDate = DateTime.Now, Description = "Остатки лезвия ножа, возраст около 3200 лет" }); ;
+            db.Finds.Add(new Find { Name = "5 копеек", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Катькин пятак" });
+            db.Finds.Add(new Find { Name = "Наконечник копья", MaterialId = 5, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Копейный наконечник, 17 век" });
+            db.Finds.Add(new Find { Name = "Кольцо", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Кольцо с рисунком 'Роза ветров'" }); ;
+            db.Finds.Add(new Find { Name = "Полковой знак", MaterialId = 9, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Лейб-гвардии Гренадерский полк, 1909 года" });
+            db.Finds.Add(new Find { Name = "Каска", MaterialId = 5, PeriodId = 2, UserId = 1, UploadDate = DateTime.Now, Description = "Каска советского солдата. Пулевое отверстие с фронтальной стороны" });
+            //
+            db.Finds.Add(new Find { Name = "5 рублей 1898", MaterialId = 6, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "5 рублей, Николай II" }); ;
+            db.Finds.Add(new Find { Name = "Крестик", MaterialId = 3, PeriodId = 4, UserId = 1, UploadDate = DateTime.Now, Description = "Место находки: Киевская обл." });
+            db.Finds.Add(new Find { Name = "Наконечник", MaterialId = 3, PeriodId = 8, UserId = 1, UploadDate = DateTime.Now, Description = "Наконечник типа 'Семечка'" });
+            db.Finds.Add(new Find { Name = "Шумящая привеска", MaterialId = 3, PeriodId = 4, UserId = 1, UploadDate = DateTime.Now, Description = "Возраст около 1000 лет" }); ;
+            db.Finds.Add(new Find { Name = "Фибула", MaterialId = 3, PeriodId = 5, UserId = 1, UploadDate = DateTime.Now, Description = "Место находки: Черниговская обл." });
+            db.Finds.Add(new Find { Name = "5 коп 1935", MaterialId = 7, PeriodId = 2, UserId = 1, UploadDate = DateTime.Now, Description = "Редкая разновидность" });
+            db.Finds.Add(new Find { Name = "Пол копейки", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Николай II" }); ;
+            db.Finds.Add(new Find { Name = "1 копейка", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Павловская копейка. Место находки: Киев" });
+            db.Finds.Add(new Find { Name = "Солид", MaterialId = 2, PeriodId = 3, UserId = 1, UploadDate = DateTime.Now, Description = "Солид Сегезмунда III, 1630-е года" });
+            db.Finds.Add(new Find { Name = "Полторак", MaterialId = 2, PeriodId = 3, UserId = 1, UploadDate = DateTime.Now, Description = "Место находки: Киевская обл." }); ;
+            db.Finds.Add(new Find { Name = "Денарий", MaterialId = 2, PeriodId = 7, UserId = 1, UploadDate = DateTime.Now, Description = "Динарий Антонин Пий 520-535г" });
+            db.Finds.Add(new Find { Name = "Вислая печать", MaterialId = 4, PeriodId = 4, UserId = 1, UploadDate = DateTime.Now, Description = "Целая вислая печать. Место находки: Житомирская обл." });
+            db.Finds.Add(new Find { Name = "Лезвие Ножа", MaterialId = 5, PeriodId = 6, UserId = 1, UploadDate = DateTime.Now, Description = "Остатки лезвия ножа, возраст около 3200 лет" }); ;
+            db.Finds.Add(new Find { Name = "5 копеек", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Катькин пятак" });
+            db.Finds.Add(new Find { Name = "Наконечник копья", MaterialId = 5, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Копейный наконечник, 17 век" });
+            db.Finds.Add(new Find { Name = "Кольцо", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Кольцо с рисунком 'Роза ветров'" }); ;
+            db.Finds.Add(new Find { Name = "Полковой знак", MaterialId = 9, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Лейб-гвардии Гренадерский полк, 1909 года" });
+            db.Finds.Add(new Find { Name = "Каска", MaterialId = 5, PeriodId = 2, UserId = 1, UploadDate = DateTime.Now, Description = "Каска советского солдата. Пулевое отверстие с фронтальной стороны" });
+            db.Finds.Add(new Find { Name = "5 коп 1935", MaterialId = 7, PeriodId = 2, UserId = 1, UploadDate = DateTime.Now, Description = "Редкая разновидность" });
+            db.Finds.Add(new Find { Name = "Пол копейки", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Николай II" }); ;
+            db.Finds.Add(new Find { Name = "1 копейка", MaterialId = 1, PeriodId = 1, UserId = 1, UploadDate = DateTime.Now, Description = "Павловская копейка. Место находки: Киев" });
+            db.Finds.Add(new Find { Name = "Солид", MaterialId = 2, PeriodId = 3, UserId = 1, UploadDate = DateTime.Now, Description = "Солид Сегезмунда III, 1630-е года" });
+            db.Finds.Add(new Find { Name = "Солид", MaterialId = 2, PeriodId = 3, UserId = 1, UploadDate = DateTime.Now, Description = "Солид Сегезмунда III, 1630-е года" });
 
             db.SaveChanges();
         }
