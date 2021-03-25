@@ -16,8 +16,7 @@ namespace Model.Database.Models
         public Material Material { get; set; }
         public DateTime UploadDate { get; set; }
         public string Description { get; set; }
-        //public int PreviewId { get; set; }
-        //public Image Preview { get; set; }
-
+        public FindImage Preview { get; set; }
+        public List<FindImage> Images { get; set; }
     }
 }

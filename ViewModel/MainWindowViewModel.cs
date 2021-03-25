@@ -1,5 +1,5 @@
 ﻿using Model.Application.Finds;
-using Model.Database.Services;
+using Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,27 +12,31 @@ namespace ViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
+        private readonly IDialogService dialogService;
         public event PropertyChangedEventHandler PropertyChanged;
         private PagingResult<List<FindsQuickViewModel>> _currentPage;
         private List<FindsQuickViewModel> _allFinds;
+        public FindsQuickViewModel SelectedItem { get; set; }
         private int _findsOffset = 0;
         private int _pageSize = 20;
-        private readonly IFindService _findService;
+        private IFindRepository _findRepository = new FindRepository();
         public ICommand PreviousFindsCommand { get; set; }
         public ICommand NextFindsCommand { get; set; }
+        public ICommand OpenFindOwerviewWindowCommand { get; set; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IDialogService dialogService)
         {
-            _findService = new FindService();
+            this.dialogService = dialogService;
             NextFindsCommand = new DelegateCommand(GetNextFinds, CanGetNextFinds);
             PreviousFindsCommand = new DelegateCommand(GetPreviousFinds, CanGetPreviousFinds);
+            OpenFindOwerviewWindowCommand = new DelegateCommand(OpenFindOverviewWindow);
         }
 
         public List<FindsQuickViewModel> AllFinds {
             get {
                 if (_currentPage == null)
                 {
-                    _currentPage = _findService.GetFindsPage(_pageSize, 0);
+                    _currentPage = _findRepository.GetFindsPage(_pageSize, 0);
                     _allFinds = _currentPage.Items;
                 }
                 return _allFinds;
@@ -48,7 +52,7 @@ namespace ViewModel
         private void GetNextFinds(object obj)
         {
             _findsOffset += _pageSize;
-            _currentPage = _findService.GetFindsPage(_pageSize, _findsOffset);
+            _currentPage = _findRepository.GetFindsPage(_pageSize, _findsOffset);
             AllFinds = _currentPage.Items;
         }
         private bool CanGetNextFinds(object arg)
@@ -61,7 +65,7 @@ namespace ViewModel
         private void GetPreviousFinds(object obj)
         {
             _findsOffset -= _pageSize;
-            _currentPage = _findService.GetFindsPage(_pageSize, _findsOffset);
+            _currentPage = _findRepository.GetFindsPage(_pageSize, _findsOffset);
             AllFinds = _currentPage.Items;
         }
         private bool CanGetPreviousFinds(object arg)
@@ -73,6 +77,17 @@ namespace ViewModel
             return true;
         }
         ////////////////
+
+
+
+        private void OpenFindOverviewWindow(object obj)
+        {
+            if (obj != null)
+            {
+                DetailedFindModel find = _findRepository.GetFindById((obj as FindsQuickViewModel).Id);
+                dialogService.OpenWindow(new FindOwerviewWindowViewModel(find));
+            }
+        }
 
         void OnPropertyChanged(string propertyName)
         {

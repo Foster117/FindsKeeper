@@ -1,13 +1,14 @@
 ﻿using Model.Application.Finds;
 using Model.Database.Models;
+using Model.Database;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
-namespace Model.Database.Services
+namespace Model.Repositories
 {
-    public class FindService : IFindService
+    public class FindRepository : IFindRepository
     {
         private AppDbContext _context;
 
@@ -18,6 +19,28 @@ namespace Model.Database.Services
             return new PagingResult<List<FindsQuickViewModel>>(selectedFinds, totalCount, offset);
         }
 
+        public DetailedFindModel GetFindById(int id)
+        {
+            DetailedFindModel findById;
+            using (_context = new AppDbContext())
+            {
+                findById = (from find in _context.Finds
+                            where find.Id == id
+                            select new DetailedFindModel()
+                            {
+                                Preview = find.Preview.ImageData,
+                                Name = find.Name,
+                                Material = find.Material.Name,
+                                Period = find.Period.Name,
+                                User = find.User.Name,
+                                Description = find.Description,
+                                UploadDate = find.UploadDate,
+                                Images = find.Images
+                            }).FirstOrDefault();
+            }
+            return findById;
+        }
+
         public void AddFind()
         {
             throw new NotImplementedException();
@@ -26,7 +49,6 @@ namespace Model.Database.Services
         {
             throw new NotImplementedException();
         }
-
         public void UpdateFind()
         {
             throw new NotImplementedException();
@@ -38,18 +60,17 @@ namespace Model.Database.Services
             using (_context = new AppDbContext())
             {
                 IQueryable<FindsQuickViewModel> finds = from find in _context.Finds
-                                                        join period in _context.Periods on find.PeriodId equals period.Id
-                                                        join material in _context.Materials on find.MaterialId equals material.Id
-                                                        join user in _context.Users on find.UserId equals user.Id
                                                         orderby find.UploadDate
                                                         select new FindsQuickViewModel
                                                         {
                                                             Id = find.Id,
                                                             Name = find.Name,
-                                                            User = user.Name,
-                                                            Period = period.Name,
-                                                            Material = material.Name,
-                                                            UploadDate = find.UploadDate
+                                                            User = find.User.Name,
+                                                            Period = find.Period.Name,
+                                                            Material = find.Material.Name,
+                                                            UploadDate = find.UploadDate,
+                                                            Preview = find.Preview.ImageData
+                                                            
                                                         };
                 return finds.Skip(offset).Take(pageSize).ToList();
             }

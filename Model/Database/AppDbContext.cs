@@ -19,6 +19,6 @@ namespace Model.Database
         public DbSet<Material> Materials { get; set; }
         public DbSet<Period> Periods { get; set; }
         public DbSet<Find> Finds { get; set; }
-        public DbSet<Image> Images { get; set; }
+        public DbSet<FindImage> Images { get; set; }
     }
 }

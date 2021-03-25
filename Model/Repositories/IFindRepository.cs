@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Model.Database.Services
+namespace Model.Repositories
 {
-    public interface IFindService
+    public interface IFindRepository
     {
         PagingResult<List<FindsQuickViewModel>> GetFindsPage(int pageSize, int offset);
+        DetailedFindModel GetFindById(int id);
         void AddFind();
         void RemoveFind();
         void UpdateFind();

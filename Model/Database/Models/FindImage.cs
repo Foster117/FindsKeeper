@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model.Database.Models
 {
-    public class Image
+    public class FindImage
     {
         public int Id { get; set; }
         public byte[] ImageData { get; set; }

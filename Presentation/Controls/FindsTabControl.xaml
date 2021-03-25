@@ -4,13 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Presentation.Controls"
-             xmlns:conv="clr-namespace:Presentation.Converters"
+             xmlns:converter="clr-namespace:Presentation.Converters"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <conv:DateConverter x:Key="dateConv"></conv:DateConverter>
+        <converter:DateConverter x:Key="dateConverter"></converter:DateConverter>
+        <converter:ByteArrayToImageConverter x:Key="imageConverter"></converter:ByteArrayToImageConverter>
     </UserControl.Resources>
-    
+
     <Grid>
         <TabControl>
             <TabItem Header="All Finds">
@@ -24,13 +26,21 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <ListView ItemsSource="{Binding Path=AllFinds, UpdateSourceTrigger=PropertyChanged}" SelectionMode="Single" Grid.Row="0" Grid.Column="0">
+                    <ListView ItemsSource="{Binding Path=AllFinds, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectionMode="Single" Grid.Row="0" Grid.Column="0"
+                              SelectedItem="{Binding Path=SelectedItem}"
+                              Name="allFindsListView">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding ElementName=allFindsListView, Path=DataContext.OpenFindOwerviewWindowCommand}" CommandParameter="{Binding ElementName=allFindsListView, Path=SelectedItem}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="45" Header="Preview">
+                                <GridViewColumn Width="60" Header="Preview">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding Path=Preview}" Width="40" Height="40" Margin="5"></Image>
+                                            <Image Source="{Binding Path=Preview, Converter={StaticResource imageConverter}}" Width="40" Height="40" Margin="5"></Image>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -38,7 +48,7 @@
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Material}" Width="150" Header="Material"></GridViewColumn>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Period}" Width="200" Header="Period"></GridViewColumn>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=User}" Width="100" Header="Owner"></GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=UploadDate, Converter={StaticResource dateConv}}" Width="100" Header="Upload Date"></GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=UploadDate, Converter={StaticResource dateConverter}}" Width="100" Header="Upload Date"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -47,7 +57,7 @@
                         <Button Margin="5 5 110 5" Width="100" HorizontalAlignment="Center" Command="{Binding Path=PreviousFindsCommand}">Prev</Button>
                         <Button Margin="110 5 5 5" Width="100" HorizontalAlignment="Center" Command="{Binding Path=NextFindsCommand}">Next</Button>
                     </Grid>
-                    
+
                 </Grid>
             </TabItem>
             <TabItem Header="My Finds" IsEnabled="False"></TabItem>
@@ -56,4 +66,3 @@
 </UserControl>
 
 
-<!--<Image Source="{Binding Path=ProductImagePath,Converter={StaticResource ImagePathConverter}}"></Image>-->

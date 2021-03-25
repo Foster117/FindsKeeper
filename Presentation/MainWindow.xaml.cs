@@ -30,7 +30,7 @@ namespace Presentation
                 DefaultValue = FindResource(typeof(Window))
             });
 
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel(new DialogService());
         }
     }
 }

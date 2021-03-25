@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.Database.Services
+namespace Model.Repositories
 {
-    public class UserService : IUserService
+    public interface IUserRepository
     {
     }
 }
