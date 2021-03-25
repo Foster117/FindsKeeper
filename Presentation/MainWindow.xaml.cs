@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViewModel;
-
 namespace Presentation
 {
     /// <summary>
@@ -31,7 +30,7 @@ namespace Presentation
                 DefaultValue = FindResource(typeof(Window))
             });
 
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel(new DialogService());
         }
     }
 }

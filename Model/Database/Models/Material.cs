@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model.Database
+namespace Model.Database.Models
 {
-    public class Period
+    public class Material
     {
         public int Id { get; set; }
-        public string PeriodName { get; set; }
+        public string Name { get; set; }
     }
 }

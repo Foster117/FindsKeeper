@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Text;
+using Model.Database.Models;
 
 namespace Model.Database
 {
@@ -18,5 +19,6 @@ namespace Model.Database
         public DbSet<Material> Materials { get; set; }
         public DbSet<Period> Periods { get; set; }
         public DbSet<Find> Finds { get; set; }
+        public DbSet<FindImage> Images { get; set; }
     }
 }

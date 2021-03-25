@@ -10,19 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Presentation.Converters;
 
-
-namespace Presentation.Controls
+namespace Presentation.Windows
 {
     /// <summary>
-    /// Interaction logic for FindsTabControl.xaml
+    /// Interaction logic for FindOverviewWindow.xaml
     /// </summary>
-    public partial class FindsTabControl : UserControl
+    public partial class FindOverviewWindow : Window
     {
-        public FindsTabControl()
+        public FindOverviewWindow()
         {
             InitializeComponent();
         }
