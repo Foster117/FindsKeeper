@@ -1,4 +1,5 @@
-# Finds Keeper
+![Find Keeper Icon](https://github.com/Foster117/FindsKeeper/blob/master/_res/fk_logo.png)
+# Finds Keeper 
 Desktop application for detectorists, that allows to share finds and view the finds of other people.  
 Created as part of an internship at Sigma Software as a training project.
 
@@ -26,4 +27,3 @@ Created as part of an internship at Sigma Software as a training project.
 
 ## Database file:
 [Link (GoogleDrive)](https://drive.google.com/drive/folders/1VWRbilN_V700julL79uw0rrnWhbdsFzn?usp=sharing)
-
