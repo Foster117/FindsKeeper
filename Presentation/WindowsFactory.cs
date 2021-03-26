@@ -18,6 +18,8 @@ namespace Presentation
             {
                 case Type contextType when contextType == typeof(FindOwerviewWindowViewModel):
                     return new FindOverviewWindow();
+                case Type contextType when contextType == typeof(RegistrationWindowViewModel):
+                    return new RegistrationWindow();
 
                 default:
                     throw new NotImplementedException();

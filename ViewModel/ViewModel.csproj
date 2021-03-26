@@ -48,6 +48,8 @@
     <Compile Include="IDialogService.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationWindowViewModel.cs" />
+    <Compile Include="SignInWindowViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

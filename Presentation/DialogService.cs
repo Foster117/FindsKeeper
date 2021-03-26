@@ -18,7 +18,17 @@ namespace Presentation
         {
             Window window = factory.CreateWindow(dataContext);
             window.DataContext = dataContext;
-            window.Show();
+
+            switch (dataContext.GetType())
+            {
+                case Type contextType when contextType == typeof(RegistrationWindowViewModel):
+                    window.ShowDialog();
+                    break;
+
+                default:
+                    window.Show();
+                    break;
+            }
         }
     }
 }

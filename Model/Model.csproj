@@ -63,6 +63,7 @@
     <Compile Include="Application\Finds\DetailedFindModel.cs" />
     <Compile Include="Application\Finds\FindsQuickViewModel.cs" />
     <Compile Include="Application\Finds\PagingResult.cs" />
+    <Compile Include="CurrentUser.cs" />
     <Compile Include="Database\AppDbContext.cs" />
     <Compile Include="Database\ContextInitializer.cs" />
     <Compile Include="Database\Models\Find.cs" />

@@ -23,13 +23,17 @@ namespace ViewModel
         public ICommand PreviousFindsCommand { get; set; }
         public ICommand NextFindsCommand { get; set; }
         public ICommand OpenFindOwerviewWindowCommand { get; set; }
+        public ICommand OpenRegWindowCommand { get; set; }
 
+
+        //ctor
         public MainWindowViewModel(IDialogService dialogService)
         {
             this.dialogService = dialogService;
             NextFindsCommand = new DelegateCommand(GetNextFinds, CanGetNextFinds);
             PreviousFindsCommand = new DelegateCommand(GetPreviousFinds, CanGetPreviousFinds);
             OpenFindOwerviewWindowCommand = new DelegateCommand(OpenFindOverviewWindow);
+            OpenRegWindowCommand = new DelegateCommand(OpenRegWindow);
         }
 
         public List<FindsQuickViewModel> AllFinds {
@@ -77,9 +81,8 @@ namespace ViewModel
             return true;
         }
         ////////////////
-
-
-
+        
+        // Open Find Overview Window Command
         private void OpenFindOverviewWindow(object obj)
         {
             if (obj != null)
@@ -87,6 +90,12 @@ namespace ViewModel
                 DetailedFindModel find = _findRepository.GetFindById((obj as FindsQuickViewModel).Id);
                 dialogService.OpenWindow(new FindOwerviewWindowViewModel(find));
             }
+        }
+        ////////////////
+
+        private void OpenRegWindow(object obj)
+        {
+            dialogService.OpenWindow(new RegistrationWindowViewModel());
         }
 
         void OnPropertyChanged(string propertyName)
