@@ -20,10 +20,12 @@ Created as part of an internship at Sigma Software as a training project.
 * MSSQL
 
 ## NuGet packages:
-* [Entity Framework](https://www.nuget.org/packages/EntityFramework)
-* [LazZiya.ImageResize](https://www.nuget.org/packages/LazZiya.ImageResize)
-* [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common)
-* [System.Windows.Interactivity.WPF](https://www.nuget.org/packages/System.Windows.Interactivity.WPF)
+|                                  |             |
+| -------------------------------- | ----------- |
+| **Entity Framework**                 | [![](https://buildstats.info/nuget/EntityFramework)](https://www.nuget.org/packages/EntityFramework) |
+| **LazZiya.ImageResize**              | [![](https://buildstats.info/nuget/LazZiya.ImageResize)](https://www.nuget.org/packages/LazZiya.ImageResize) |
+| **System.Drawing.Common**            | [![](https://buildstats.info/nuget/System.Drawing.Common)](https://www.nuget.org/packages/System.Drawing.Common) |
+| **System.Windows.Interactivity.WPF** | [![](https://buildstats.info/nuget/System.Windows.Interactivity.WPF)](https://www.nuget.org/packages/System.Windows.Interactivity.WPF) |
 
 ## Database file:
 [Link (GoogleDrive)](https://drive.google.com/drive/folders/1VWRbilN_V700julL79uw0rrnWhbdsFzn?usp=sharing)
