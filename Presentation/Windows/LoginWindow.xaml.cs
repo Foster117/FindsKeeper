@@ -16,24 +16,25 @@ using ViewModel;
 namespace Presentation.Windows
 {
     /// <summary>
-    /// Interaction logic for RegistrationWindow.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class RegistrationWindow : Window
+    public partial class LoginWindow : Window
     {
-        public RegistrationWindow()
+        public LoginWindow()
         {
             InitializeComponent();
-
         }
+
+        //private void Window_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    LoginWindowViewModel context = (LoginWindowViewModel)DataContext;
+        //    if (context.CloseAction == null)
+        //        context.CloseAction = new Action(Close);
+        //}
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             ((dynamic)DataContext).Password = ((PasswordBox)sender).Password;
-        }
-
-        private void RepeatPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            ((dynamic)DataContext).RepeatPassword = ((PasswordBox)sender).Password;
         }
     }
 }

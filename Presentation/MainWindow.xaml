@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation" 
         xmlns:controls="clr-namespace:Presentation.Controls"
+        xmlns:converter="clr-namespace:Presentation.Converters"
         mc:Ignorable="d"
         Title="Finds Keeper" Height="600" Width="1100" Icon="Resources/FindsKeeper_Icon.ico">
 
@@ -14,6 +15,9 @@
             <Setter Property="FontFamily" Value="/Presentation;component/Resources/#Comfortaa" />
         </Style>
     </Window.Style>
+    <Window.Resources>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVis"></converter:BoolToVisibilityConverter>
+    </Window.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -46,10 +50,10 @@
                 <MenuItem Header="About"/>
             </MenuItem>
 
-            <MenuItem Header="Register" Grid.Column="4" Margin="5 0 5 0" HorizontalAlignment="Center" Command="{Binding Path=OpenRegWindowCommand}"/>
-            <MenuItem Header="Log In"  Grid.Column="5"  Margin="5 0 5 0" HorizontalAlignment="Center"/>
-            <MenuItem Header="UserName" Grid.Column="4" Margin="5 0 5 0" HorizontalAlignment="Center" Visibility="Hidden"/>
-            <MenuItem Header="Logout"  Grid.Column="5"  Margin="5 0 5 0" HorizontalAlignment="Center" Visibility="Hidden"/>
+            <MenuItem Header="{Binding Path=AuthenticationVM.UserName}" Grid.Column="4" Margin="{StaticResource MenuRegBtnsMargin}" HorizontalAlignment="Center" Visibility="{Binding Path=AuthenticationVM.IsLogoutBtnsVisible, Converter={StaticResource BoolToVis}}"/>
+            <MenuItem Header="Logout"  Grid.Column="5"  Margin="{StaticResource MenuRegBtnsMargin}" HorizontalAlignment="Center" Visibility="{Binding Path=AuthenticationVM.IsLogoutBtnsVisible, Converter={StaticResource BoolToVis}}" Command="{Binding Path=AuthenticationVM.LogoutCommand}"/>
+            <MenuItem Header="Register" Grid.Column="4" Margin="{StaticResource MenuRegBtnsMargin}" HorizontalAlignment="Center" Visibility="{Binding Path=AuthenticationVM.IsRegBtnsVisible, Converter={StaticResource BoolToVis}}" Command="{Binding Path=AuthenticationVM.OpenRegWindowCommand}"/>
+            <MenuItem Header="Log In"  Grid.Column="5"  Margin="{StaticResource MenuRegBtnsMargin}" HorizontalAlignment="Center" Visibility="{Binding Path=AuthenticationVM.IsRegBtnsVisible, Converter={StaticResource BoolToVis}}" Command="{Binding Path=AuthenticationVM.OpenLoginWindowCommand}"/>
         </Menu>
 
         <controls:FindsTabControl Grid.Row="1" Margin="0 5px 0 0" DataContext="{Binding}">

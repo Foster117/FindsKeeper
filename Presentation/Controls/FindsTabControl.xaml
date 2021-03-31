@@ -26,13 +26,13 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <ListView ItemsSource="{Binding Path=AllFinds, UpdateSourceTrigger=PropertyChanged}" 
+                    <ListView ItemsSource="{Binding Path=AllFindsTabVM.AllFinds, UpdateSourceTrigger=PropertyChanged}" 
                               SelectionMode="Single" Grid.Row="0" Grid.Column="0"
-                              SelectedItem="{Binding Path=SelectedItem}"
+                              SelectedItem="{Binding Path=AllFindsTabVM.SelectedItem}"
                               Name="allFindsListView">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding ElementName=allFindsListView, Path=DataContext.OpenFindOwerviewWindowCommand}" CommandParameter="{Binding ElementName=allFindsListView, Path=SelectedItem}"/>
+                                <i:InvokeCommandAction Command="{Binding ElementName=allFindsListView, Path=DataContext.AllFindsTabVM.OpenFindOwerviewWindowCommand}" CommandParameter="{Binding ElementName=allFindsListView, Path=SelectedItem}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <ListView.View>
@@ -54,8 +54,8 @@
                     </ListView>
 
                     <Grid Grid.Row="1" Grid.Column="0">
-                        <Button Margin="5 5 110 5" Width="100" HorizontalAlignment="Center" Command="{Binding Path=PreviousFindsCommand}">Prev</Button>
-                        <Button Margin="110 5 5 5" Width="100" HorizontalAlignment="Center" Command="{Binding Path=NextFindsCommand}">Next</Button>
+                        <Button Margin="5 5 110 5" Width="100" HorizontalAlignment="Center" Command="{Binding Path=AllFindsTabVM.PreviousFindsCommand}">Prev</Button>
+                        <Button Margin="110 5 5 5" Width="100" HorizontalAlignment="Center" Command="{Binding Path=AllFindsTabVM.NextFindsCommand}">Next</Button>
                     </Grid>
 
                 </Grid>

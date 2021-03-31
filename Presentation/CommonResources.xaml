@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Presentation"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <Thickness x:Key="IdentityFieldNameMargin" Left="0" Top="0" Right="0" Bottom="5"></Thickness>
+    <Thickness x:Key="MenuRegBtnsMargin" Left="5" Top="0" Right="5" Bottom="0"></Thickness>
+    <sys:Double x:Key="IdentityBtnWidth">80</sys:Double>
+    <sys:Double x:Key="IdentityBtnHeight">30</sys:Double>
+    <FontWeight x:Key="InputTextWeight">Bold</FontWeight>
+    
+    <Style TargetType="PasswordBox">
+        <Setter Property="Margin" Value="0 0 0 10"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="PasswordChar" Value="X"/>
+    </Style>
+</ResourceDictionary>

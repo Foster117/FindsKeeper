@@ -39,7 +39,7 @@ namespace Model.Database
             db.Periods.Add(new Period { Name = "Скифы" });
             db.Periods.Add(new Period { Name = "Другой" });
 
-            db.Users.Add(new User() { Name = "Foster117", Password = "qwerty" });
+            db.Users.Add(new User() { Name = "Foster117", Password = "AK9nU0aKRgFjO89TDAvrvD7SWVjrTiXp3ldNp3mlLgknF3+vjxRCK/NZOCberCkljQ==" });
 
             db.SaveChanges();
 

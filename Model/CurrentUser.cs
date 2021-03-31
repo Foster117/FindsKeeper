@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Database.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,22 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class CurrentUser
+    public class CurrentUser
     {
-        private static CurrentUser _currentUser;
+        private static CurrentUser _currentUser = null;
+        public delegate void UserStateHandler(string state);
+        public static event UserStateHandler UserStateNotify; 
         public string UserName { get; set; }
         public int UserId { get; set; }
+        public bool IsLogged
+        {
+            get
+            {
+                if (_currentUser != null)
+                    return true;
+                return false;
+            }
+        }
 
         private CurrentUser(int userId, string userName)
         {
@@ -18,16 +30,26 @@ namespace Model
             this.UserName = userName;
         }
 
-        public static CurrentUser GetUser(int userId, string userName)
-        {
-            if (_currentUser == null)
-                _currentUser = new CurrentUser(userId, userName);
-            return _currentUser;
-        }
-        public static void RemoveUser()
+        public static string GetUserName()
         {
             if (_currentUser != null)
-                _currentUser = null;
+            {
+                return _currentUser.UserName;
+            }
+            return null;
+        }
+        public static void Login(User user)
+        {
+            if (_currentUser == null)
+            {
+                _currentUser = new CurrentUser(user.Id, user.Name);
+                UserStateNotify?.Invoke("Logged");
+            }
+        }
+        public static void Logout()
+        {
+            _currentUser = null;
+            UserStateNotify?.Invoke("LoggedOut");
         }
     }
 }

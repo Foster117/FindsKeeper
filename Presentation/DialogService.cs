@@ -19,12 +19,18 @@ namespace Presentation
             Window window = factory.CreateWindow(dataContext);
             window.DataContext = dataContext;
 
+            if (dataContext is IClosable closable)
+            {
+                closable.CloseAction = window.Close;
+            }
             switch (dataContext.GetType())
             {
                 case Type contextType when contextType == typeof(RegistrationWindowViewModel):
                     window.ShowDialog();
                     break;
-
+                case Type contextType when contextType == typeof(LoginWindowViewModel):
+                    window.ShowDialog();
+                    break;
                 default:
                     window.Show();
                     break;

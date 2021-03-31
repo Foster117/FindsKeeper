@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ViewModel
 {
-    class SignInWindowViewModel
+    public interface IClosable
     {
+        Action CloseAction { get; set; }
     }
 }
