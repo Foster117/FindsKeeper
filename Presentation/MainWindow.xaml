@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation" 
         xmlns:controls="clr-namespace:Presentation.Controls"
+        xmlns:converter="clr-namespace:Presentation.Converters"
         mc:Ignorable="d"
         Title="Finds Keeper" Height="600" Width="1100" Icon="Resources/FindsKeeper_Icon.ico">
 
@@ -14,6 +15,9 @@
             <Setter Property="FontFamily" Value="/Presentation;component/Resources/#Comfortaa" />
         </Style>
     </Window.Style>
+    <Window.Resources>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVis"></converter:BoolToVisibilityConverter>
+    </Window.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -21,18 +25,35 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Menu VerticalAlignment="Top" Grid.Row="0" Height="20px">
-            <MenuItem Header="File">
-                <MenuItem Header="New Project" ></MenuItem>
-                <MenuItem Header="Open Project" >
-                    <MenuItem Header="WinForms"></MenuItem>
-                    <MenuItem Header="WPF" ></MenuItem>
-                </MenuItem>
-                <Separator/>
-                <MenuItem Header="Exit" ></MenuItem>
+        <Menu>
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="File" Grid.Column="0">
+                <MenuItem Header="Exit"/>
             </MenuItem>
-            <MenuItem Header="Edit"></MenuItem>
-            <MenuItem Header="View"></MenuItem>
+            <MenuItem Header="Edit" Grid.Column="1">
+                <MenuItem Header="Cut"/>
+            </MenuItem>
+            <MenuItem Header="Help" Grid.Column="2">
+                <MenuItem Header="About"/>
+            </MenuItem>
+
+            <MenuItem Header="{Binding Path=AuthenticationVM.UserName}" Grid.Column="4" Margin="{StaticResource MenuRegBtnsMargin}" HorizontalAlignment="Center" Visibility="{Binding Path=AuthenticationVM.IsLogoutBtnsVisible, Converter={StaticResource BoolToVis}}"/>
+            <MenuItem Header="Logout"  Grid.Column="5"  Margin="{StaticResource MenuRegBtnsMargin}" HorizontalAlignment="Center" Visibility="{Binding Path=AuthenticationVM.IsLogoutBtnsVisible, Converter={StaticResource BoolToVis}}" Command="{Binding Path=AuthenticationVM.LogoutCommand}"/>
+            <MenuItem Header="Register" Grid.Column="4" Margin="{StaticResource MenuRegBtnsMargin}" HorizontalAlignment="Center" Visibility="{Binding Path=AuthenticationVM.IsRegBtnsVisible, Converter={StaticResource BoolToVis}}" Command="{Binding Path=AuthenticationVM.OpenRegWindowCommand}"/>
+            <MenuItem Header="Log In"  Grid.Column="5"  Margin="{StaticResource MenuRegBtnsMargin}" HorizontalAlignment="Center" Visibility="{Binding Path=AuthenticationVM.IsRegBtnsVisible, Converter={StaticResource BoolToVis}}" Command="{Binding Path=AuthenticationVM.OpenLoginWindowCommand}"/>
         </Menu>
 
         <controls:FindsTabControl Grid.Row="1" Margin="0 5px 0 0" DataContext="{Binding}">

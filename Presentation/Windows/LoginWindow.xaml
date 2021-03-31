@@ -1,0 +1,68 @@
+﻿<Window x:Class="Presentation.Windows.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Presentation.Windows"
+        mc:Ignorable="d" 
+        Title="LogIn" Height="350" Width="350"
+        Icon="/Presentation;component/Resources/FindsKeeper_Icon.ico"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    
+    <Window.Style>
+        <!--// Default font-->
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="/Presentation;component/Resources/#Comfortaa" />
+            <Setter Property="FontSize" Value="13 px" />
+        </Style>
+    </Window.Style>
+
+    <Grid Background="#FFECECEC">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Margin="0 20 0 20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="LogIn" FontSize="22" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1" Width="250" VerticalAlignment="Center">
+            <TextBlock Margin="{StaticResource IdentityFieldNameMargin}" 
+                       FontWeight="{StaticResource InputTextWeight}">User Name:
+            </TextBlock>
+
+            <TextBox Margin="0 0 0 10" 
+                     Height="30" 
+                     FontSize="16" 
+                     VerticalContentAlignment="Center"
+                     Text="{Binding Path=UserName}"/>
+
+            <TextBlock Margin="{StaticResource IdentityFieldNameMargin}" 
+                       FontWeight="{StaticResource InputTextWeight}">Password:
+            </TextBlock>
+            <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged"></PasswordBox>
+        </StackPanel>
+        <TextBlock x:Name="ErrorContainer" 
+                   Grid.Row="2" 
+                   Width="250" 
+                   Margin="10" 
+                   Foreground="#FFC71717" 
+                   Text="{Binding Path=ErrorMessage}" 
+                   TextWrapping="Wrap">
+        </TextBlock>
+
+        <Grid Grid.Row="3" Width="200" VerticalAlignment="Center">
+            <Button Content="Ok" 
+                    Width="{StaticResource IdentityBtnWidth}" 
+                    Height="{StaticResource IdentityBtnHeight}" 
+                    HorizontalAlignment="Left" 
+                    Command="{Binding Path=LoginCommand}"></Button>
+            <Button Content="Cancel" 
+                    Width="{StaticResource IdentityBtnWidth}" 
+                    Height="{StaticResource IdentityBtnHeight}" 
+                    Command="{Binding Path=CloseCommand}"
+                    HorizontalAlignment="Right"/>
+        </Grid>
+
+    </Grid>
+</Window>

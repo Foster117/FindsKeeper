@@ -7,7 +7,7 @@
         xmlns:converter="clr-namespace:Presentation.Converters"
         mc:Ignorable="d"
         Title="{Binding Path=Find.Name}" Height="600" Width="900" 
-        Icon="/Presentation;component/Resources/FindsKeeper_Icon.ico" ShowInTaskbar="False" ResizeMode="NoResize">
+        Icon="/Presentation;component/Resources/FindsKeeper_Icon.ico" ResizeMode="NoResize">
     <Window.Resources>
         <converter:DateConverter x:Key="dateConverter"></converter:DateConverter>
         <converter:ByteArrayToImageConverter x:Key="imageConverter"></converter:ByteArrayToImageConverter>
@@ -27,7 +27,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-
         </Grid.ColumnDefinitions>
 
         <GroupBox Margin="5">
