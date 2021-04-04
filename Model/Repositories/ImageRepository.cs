@@ -13,17 +13,22 @@ namespace Model.Repositories
     {
         public byte[] MakeFindPreview(string path)
         {
-            byte[] byteImage;
-            FileStream fileStream = new FileStream(path, FileMode.Open);
-            Image image = Image.FromStream(fileStream);
-            MemoryStream memoryStream = new MemoryStream();
-            image.ScaleAndCrop(40, 40).Save(memoryStream, image.RawFormat); //save to memory stream
-            byteImage = memoryStream.ToArray();
-
-            memoryStream.Dispose();
-            fileStream.Dispose();
-
-            return byteImage;
+            try
+            {
+                byte[] byteImage;
+                FileStream fileStream = new FileStream(path, FileMode.Open);
+                Image image = Image.FromStream(fileStream);
+                MemoryStream memoryStream = new MemoryStream();
+                image.ScaleAndCrop(40, 40).Save(memoryStream, image.RawFormat); //save to memory stream
+                byteImage = memoryStream.ToArray();
+                memoryStream.Dispose();
+                fileStream.Dispose();
+                return byteImage;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public byte[] MakeFindImage(string path)
         {

@@ -75,8 +75,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\ByteArrayToImageConverter.cs" />
     <Compile Include="DialogService.cs" />
     <Compile Include="WindowsFactory.cs" />
     <Compile Include="Windows\FindOverviewWindow.xaml.cs">

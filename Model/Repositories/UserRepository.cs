@@ -12,26 +12,23 @@ namespace Model.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private AppDbContext _context;
+        private readonly AppDbContext _context;
+        public UserRepository(AppDbContext context)
+        {
+            _context = context;
+        }
 
         public void AddUser(User user)
         {
-            using (_context = new AppDbContext())
-            {
-                _context.Users.Add(user);
-                _context.SaveChanges();
-            }
+            _context.Users.Add(user);
+            _context.SaveChanges();
         }
 
         public User GetUserByName(string name)
         {
-            User findedUser;
-            using (_context = new AppDbContext())
-            {
-                findedUser = (from user in _context.Users
-                              where user.Name == name
-                              select user).FirstOrDefault();
-            }
+            User findedUser = (from user in _context.Users
+                               where user.Name == name
+                               select user).FirstOrDefault();
             return findedUser;
         }
     }

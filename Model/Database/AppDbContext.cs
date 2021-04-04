@@ -15,10 +15,10 @@ namespace Model.Database
         public AppDbContext() : base("DBConnection")
         {
         }
-        public DbSet<User> Users { get; set; } 
-        public DbSet<Material> Materials { get; set; }
-        public DbSet<Period> Periods { get; set; }
-        public DbSet<Find> Finds { get; set; }
-        public DbSet<FindImage> Images { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Material> Materials { get; set; }
+        public virtual DbSet<Period> Periods { get; set; }
+        public virtual DbSet<Find> Finds { get; set; }
+        public virtual DbSet<FindImage> Images { get; set; }
     }
 }

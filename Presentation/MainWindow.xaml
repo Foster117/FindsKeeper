@@ -16,7 +16,7 @@
         </Style>
     </Window.Style>
     <Window.Resources>
-        <converter:BoolToVisibilityConverter x:Key="BoolToVis"></converter:BoolToVisibilityConverter>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
     
     <Grid>

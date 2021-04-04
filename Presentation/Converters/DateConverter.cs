@@ -10,9 +10,17 @@ namespace Presentation.Converters
 {
     public class DateConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType = null, object parameter = null, CultureInfo culture = null)
         {
-            return ((DateTime)value).ToString("dd.MM.yyyy");
+            if (value == null)
+            {
+                return Binding.DoNothing;
+            }
+            if (value is DateTime date)
+            {
+                return date.ToString("dd.MM.yyyy");
+            }
+            return Binding.DoNothing;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

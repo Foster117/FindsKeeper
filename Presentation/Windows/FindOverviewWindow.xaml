@@ -10,7 +10,6 @@
         Icon="/Presentation;component/Resources/FindsKeeper_Icon.ico" ResizeMode="NoResize">
     <Window.Resources>
         <converter:DateConverter x:Key="dateConverter"></converter:DateConverter>
-        <converter:ByteArrayToImageConverter x:Key="imageConverter"></converter:ByteArrayToImageConverter>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="/Presentation;component/Resources/Background.jpg" />
@@ -31,7 +30,7 @@
 
         <GroupBox Margin="5">
             <GroupBox.Header>
-                <Image Source="{Binding Path=Find.Preview, Converter={StaticResource imageConverter}}" />
+                <Image Source="{Binding Path=Find.Preview}" />
             </GroupBox.Header>
 
             <Grid Grid.Column="0">
@@ -73,7 +72,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Image Grid.Row="0" Source="{Binding Path=SelectedImage.ImageData, Converter={StaticResource imageConverter}}" Margin="10 29 10 10"></Image>
+            <Image Grid.Row="0" Source="{Binding Path=SelectedImage.ImageData}" Margin="10 29 10 10"></Image>
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
                 <Button Width="80" Height="30" Command="{Binding Path=PreviousImageCommand}">&lt;&lt;&lt;</Button>
                 <TextBlock VerticalAlignment="Center" Width="100" Margin="20 0 20 0" Text="{Binding Path=SliderInfo}" TextAlignment="Center"></TextBlock>

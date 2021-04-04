@@ -9,6 +9,7 @@ namespace Model.Application.Finds
 {
     public class DetailedFindModel
     {
+        public int Id { get; set; }
         public byte[] Preview { get; set; }
         public string Name { get; set; }
         public string User { get; set; }

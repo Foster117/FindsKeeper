@@ -55,16 +55,16 @@ namespace ViewModel
             LogoutCommand = new DelegateCommand(Logout);
         }
 
-        private void UserStateHandler(string state)
+        private void UserStateHandler(bool isLogged)
         {
-            if (state == "Logged")
+            if (isLogged)
             {
                 IsRegBtnsVisible = false;
                 IsLogoutBtnsVisible = true;
                 UserName = CurrentUser.GetUserName();
                 return;
             }
-            if (state == "LoggedOut")
+            else
             {
                 IsLogoutBtnsVisible = false;
                 IsRegBtnsVisible = true;
