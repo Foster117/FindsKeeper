@@ -84,6 +84,32 @@ namespace Model.Repositories.Tests
         }
 
 
+        [TestMethod()]
+        public void GetFindsPage_CorrectInputDataOffset_PagingResultInstanceExpected()
+        {
+            // Arrange
+            int pageSize = 5;
+            int offset = 5;
+            int expectedItemsCount = 3;
+            PagingResult<List<FindsQuickViewModel>> result;
+            IQueryable<Find> finds = GetQueryableFindsList();
+            Mock<DbSet<Find>> findTable = new Mock<DbSet<Find>>();
+            SetupDbSetFindsMock(findTable, finds);
+            int expectedTotalCount = findTable.Object.Count();
+            Mock<AppDbContext> mockContext = new Mock<AppDbContext>();
+            mockContext.Setup(m => m.Finds).Returns(findTable.Object);
+            FindRepository findRepo = new FindRepository(mockContext.Object);
+
+            // Act
+            result = findRepo.GetFindsPage(pageSize, offset);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedItemsCount, result.Items.Count);
+            Assert.AreEqual(expectedTotalCount, result.TotalCount);
+        }
+
+
         //////////////////////// 
         //////////////////////// 
         private IQueryable<Find> GetQueryableFindsList()
