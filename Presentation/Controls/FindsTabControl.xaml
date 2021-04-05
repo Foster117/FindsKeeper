@@ -10,7 +10,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converter:DateConverter x:Key="dateConverter"></converter:DateConverter>
-        <converter:ByteArrayToImageConverter x:Key="imageConverter"></converter:ByteArrayToImageConverter>
     </UserControl.Resources>
 
     <Grid>
@@ -40,7 +39,7 @@
                                 <GridViewColumn Width="60" Header="Preview">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding Path=Preview, Converter={StaticResource imageConverter}}" Width="40" Height="40" Margin="5"></Image>
+                                            <Image Source="{Binding Path=Preview}" Width="40" Height="40" Margin="5"></Image>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

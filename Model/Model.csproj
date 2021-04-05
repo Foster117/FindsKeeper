@@ -79,6 +79,14 @@
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryFactory.cs" />
+    <Compile Include="Validation\Exceptions\ComparePasswordsException.cs" />
+    <Compile Include="Validation\Exceptions\ExistUserException.cs" />
+    <Compile Include="Validation\Exceptions\InvalidNameLengthException.cs" />
+    <Compile Include="Validation\Exceptions\InvalidPasswordException.cs" />
+    <Compile Include="Validation\Exceptions\InvalidPasswordLengthException.cs" />
+    <Compile Include="Validation\Exceptions\NonЕxistUserException.cs" />
+    <Compile Include="Validation\Exceptions\ValidationException.cs" />
     <Compile Include="Validation\PasswordValidation.cs" />
     <Compile Include="Validation\UserValidation.cs" />
   </ItemGroup>

@@ -1,67 +1,59 @@
 ﻿using Model.Database;
 using Model.Database.Models;
+using Model.Repositories;
+using Model.Validation.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model.Validation
 {
     public class UserValidation
     {
-        AppDbContext _context = new AppDbContext();
+        IUserRepository _userRepository;
 
-        public string ValidateUserNameRegistration(string name)
+        //ctor
+        public UserValidation(IUserRepository userRepository)
         {
-            string errorMessage = null;
-            errorMessage += ValidateUserNameLength(name);
-            errorMessage += CheckUserNameInDB(name);
-            return errorMessage;
+            _userRepository = userRepository;
         }
 
-        public string ValidateUserNameSignIn(string name)
+        public void ValidateUserNameRegistration(string name)
         {
-            string errorMessage = null;
-            errorMessage += ValidateUserNameLength(name);
-            errorMessage += SearchUserNameInDB(name);
-            return errorMessage;
+            ValidateUserNameLength(name);
+            CheckForUnusedName(name);
         }
 
-        private string ValidateUserNameLength(string name)
+        public void ValidateUserNameSignIn(string name)
         {
-            if (String.IsNullOrEmpty(name) || name.Length < 2)
-                return "Name must be at least 2 characters.";
-            return null;
+            ValidateUserNameLength(name);
+            CheckForUserExistence(name);
         }
 
-        private string CheckUserNameInDB(string name)
+        ///////////////
+        private void ValidateUserNameLength(string name)
         {
-            User findedUser;
-            using (_context = new AppDbContext())
+            int minLength = 2;
+            if (String.IsNullOrEmpty(name) || name.Length < minLength)
             {
-                findedUser = (from user in _context.Users
-                              where user.Name == name
-                              select user).FirstOrDefault();
+                throw new InvalidNameLengthException(minLength);
             }
-            if (findedUser == null)
-                return null;
-            else
-                return "This name is already taken.";
         }
-        private string SearchUserNameInDB(string name)
+
+        private void CheckForUnusedName(string name)
         {
-            User findedUser;
-            using (_context = new AppDbContext())
+            User user = _userRepository.GetUserByName(name);
+            if (user != null)
             {
-                findedUser = (from user in _context.Users
-                              where user.Name == name
-                              select user).FirstOrDefault();
+                throw new ExistUserException(name);
             }
-            if (findedUser != null)
-                return null;
-            else
-                return "User with this name is not registered.";
+        }
+
+        private void CheckForUserExistence(string name)
+        {
+            User user = _userRepository.GetUserByName(name);
+            if (user == null)
+            {
+                throw new NonЕxistUserException(name);
+            }
         }
     }
 }

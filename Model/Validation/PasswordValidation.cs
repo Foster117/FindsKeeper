@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Validation.Exceptions;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 
@@ -7,29 +8,17 @@ namespace Model.Validation
 {
     public class PasswordValidation
     {
-        public string ValidatePasswordRegistration(string password, string repeatPassword)
+        public void ValidatePasswordRegistration(string password, string repeatPassword)
         {
-            string errorMessage = null;
-            errorMessage += ValidatePasswordLength(password);
-            errorMessage += ValidatePasswordComparison(password, repeatPassword);
-            return errorMessage;
-        }
-        public string ValidatePasswordSignIn(string hashedPassword, string password)
-        {
-            string errorMessage = null;
-            errorMessage = ValidatePasswordLength(password);
-            if (!string.IsNullOrEmpty(errorMessage))
-            {
-                return errorMessage;
-            }
-            
-            if (!VerifyHashedPassword(hashedPassword, password))
-            {
-                return "Incorrect password.";
-            }
-            return null;
+            ValidatePasswordLength(password);
+            ComparePasswords(password, repeatPassword);
         }
 
+        public void ValidatePasswordSignIn(string hashedPassword, string password)
+        {
+            ValidatePasswordLength(password);
+            ValidateHashedPassword(hashedPassword, password);
+        }
 
         public string HashPassword(string password)
         {
@@ -50,21 +39,22 @@ namespace Model.Validation
             return Convert.ToBase64String(dst);
         }
 
-        private bool VerifyHashedPassword(string hashedPassword, string password)
+        private void ValidatePasswordLength(string password)
+        {
+            int minLength = 6;
+            if (String.IsNullOrEmpty(password) || password.Length < minLength)
+            {
+                throw new InvalidPasswordLengthException(minLength);
+            }
+        }
+
+        private void ValidateHashedPassword(string hashedPassword, string password)
         {
             byte[] buffer4;
-            if (hashedPassword == null)
-            {
-                return false;
-            }
-            if (password == null)
-            {
-                throw new ArgumentNullException("password");
-            }
             byte[] src = Convert.FromBase64String(hashedPassword);
             if ((src.Length != 0x31) || (src[0] != 0))
             {
-                return false;
+                throw new InvalidPasswordException();
             }
             byte[] dst = new byte[0x10];
             Buffer.BlockCopy(src, 1, dst, 0, 0x10);
@@ -74,21 +64,18 @@ namespace Model.Validation
             {
                 buffer4 = bytes.GetBytes(0x20);
             }
-            return buffer3.SequenceEqual(buffer4);
+            if (!buffer3.SequenceEqual(buffer4))
+            {
+                throw new InvalidPasswordException();
+            }
         }
 
-        private string ValidatePasswordLength(string password)
-        {
-            if (String.IsNullOrEmpty(password) || password.Length < 6)
-                return "Password must be at least 6 characters.";
-            return null;
-        }
-
-        private string ValidatePasswordComparison(string password, string repeatPassword)
+        private void ComparePasswords(string password, string repeatPassword)
         {
             if (password != repeatPassword)
-                return "Different passwords.";
-            return null;
+            {
+                throw new ComparePasswordsException();
+            }
         }
     }
 }

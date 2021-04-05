@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 
 namespace Model.Database
 {
-    public class ContextInitializer : DropCreateDatabaseAlways<AppDbContext>
+    public class ContextInitializer : DropCreateDatabaseIfModelChanges<AppDbContext>
     {
         protected override void Seed(AppDbContext db)
         {

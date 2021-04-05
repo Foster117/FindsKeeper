@@ -11,12 +11,13 @@ using Model.Application.Users;
 using Model.Database.Models;
 using Model.Repositories;
 using Model.Validation;
+using Model.Validation.Exceptions;
 
 namespace ViewModel
 {
     public class RegistrationWindowViewModel : INotifyPropertyChanged, IClosable
     {
-        IUserRepository _userRepository = new UserRepository();
+        IUserRepository _userRepository = RepositoryFactory.GetRepositoryFactory().UserRepository;
         public Action CloseAction { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand AddUserCommand { get; set; }
@@ -44,21 +45,26 @@ namespace ViewModel
 
         private void AddUser(object parameter)
         {
-            ErrorMessage = null;
-            UserValidation userValidation = new UserValidation();
+            UserValidation userValidation = new UserValidation(_userRepository);
             PasswordValidation passwordValidation = new PasswordValidation();
 
-            string nameValidationMessage = userValidation.ValidateUserNameRegistration(UserName);
-            if (!string.IsNullOrEmpty(nameValidationMessage))
+            try
             {
-                ErrorMessage = nameValidationMessage;
+                userValidation.ValidateUserNameRegistration(UserName);
+            }
+            catch (ValidationException ex)
+            {
+                ErrorMessage = ex.Message;
                 return;
             }
 
-            string passwordValidationMessage = passwordValidation.ValidatePasswordRegistration(Password, RepeatPassword);
-            if (!string.IsNullOrEmpty(passwordValidationMessage))
+            try
             {
-                ErrorMessage = passwordValidationMessage;
+                passwordValidation.ValidatePasswordRegistration(Password, RepeatPassword);
+            }
+            catch (ValidationException ex)
+            {
+                ErrorMessage = ex.Message;
                 return;
             }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model.Repositories
 {
-    interface IImageRepository
+    public interface IImageRepository
     {
         byte[] MakeFindPreview(string path);
         byte[] MakeFindImage(string path);

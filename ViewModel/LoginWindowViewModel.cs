@@ -2,6 +2,7 @@
 using Model.Database.Models;
 using Model.Repositories;
 using Model.Validation;
+using Model.Validation.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace ViewModel
 {
     public class LoginWindowViewModel : INotifyPropertyChanged, IClosable
     {
-        IUserRepository _userRepository = new UserRepository();
+        IUserRepository _userRepository = RepositoryFactory.GetRepositoryFactory().UserRepository;
         public Action CloseAction { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand LoginCommand { get; set; }
@@ -38,27 +39,32 @@ namespace ViewModel
             CloseCommand = new DelegateCommand(CloseWindow);
         }
 
-
         private void Login(object parameter)
         {
             ErrorMessage = null;
             User user;
-            UserValidation userValidation = new UserValidation();
+            UserValidation userValidation = new UserValidation(_userRepository);
             PasswordValidation passwordValidation = new PasswordValidation();
 
-            string nameValidationMessage = userValidation.ValidateUserNameSignIn(UserName);
-            if (!string.IsNullOrEmpty(nameValidationMessage))
+            try
             {
-                ErrorMessage = nameValidationMessage;
+                userValidation.ValidateUserNameSignIn(UserName);
+            }
+            catch (ValidationException ex)
+            {
+                ErrorMessage = ex.Message;
                 return;
             }
 
             user = _userRepository.GetUserByName(UserName);
 
-            string passwordValidationMessage = passwordValidation.ValidatePasswordSignIn(user.Password, Password);
-            if (!string.IsNullOrEmpty(passwordValidationMessage))
+            try
             {
-                ErrorMessage = passwordValidationMessage;
+                passwordValidation.ValidatePasswordSignIn(user.Password, Password);
+            }
+            catch (ValidationException ex)
+            {
+                ErrorMessage = ex.Message;
                 return;
             }
 

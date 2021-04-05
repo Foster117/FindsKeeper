@@ -1,4 +1,5 @@
-﻿using Model.Application.Finds;
+﻿using Model;
+using Model.Application.Finds;
 using Model.Repositories;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace ViewModel
         public FindsQuickViewModel SelectedItem { get; set; }
         private int _findsOffset = 0;
         private int _pageSize = 20;
-        private IFindRepository _findRepository = new FindRepository();
+        private IFindRepository _findRepository = RepositoryFactory.GetRepositoryFactory().FindRepository;
         public ICommand PreviousFindsCommand { get; set; }
         public ICommand NextFindsCommand { get; set; }
         public ICommand OpenFindOwerviewWindowCommand { get; set; }

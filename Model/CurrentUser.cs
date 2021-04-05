@@ -10,7 +10,7 @@ namespace Model
     public class CurrentUser
     {
         private static CurrentUser _currentUser = null;
-        public delegate void UserStateHandler(string state);
+        public delegate void UserStateHandler(bool isLogged);
         public static event UserStateHandler UserStateNotify; 
         public string UserName { get; set; }
         public int UserId { get; set; }
@@ -43,13 +43,13 @@ namespace Model
             if (_currentUser == null)
             {
                 _currentUser = new CurrentUser(user.Id, user.Name);
-                UserStateNotify?.Invoke("Logged");
+                UserStateNotify?.Invoke(true);
             }
         }
         public static void Logout()
         {
             _currentUser = null;
-            UserStateNotify?.Invoke("LoggedOut");
+            UserStateNotify?.Invoke(false);
         }
     }
 }
